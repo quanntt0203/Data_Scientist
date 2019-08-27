@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>var __basePath = "/"</script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+    </style>
+    <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-balham.css">
+</head>
+<body>
+    <p>"Hello Boss!  <a href='/logout'>Logout</a>"</p>
+    <p>&nbsp;</p>
+    <div id="myGrid" style="height: 600px;width:100%;" class="ag-theme-balham"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        // specify the columns
+        var columnDefs = [
+            {
+                headerName: "Make", field: "make", checkboxSelection: true
+            },
+            { headerName: "Model", field: "model", hide: false },
+            { headerName: "Price", field: "price", type: 'numericColumn', filter: 'agNumberColumnFilter', filterParams: { clearButton: true, applyButton: true } }
+        ];
+
+        // specify the data
+        var rowData = [
+            { make: "Toyota", model: "Celica", price: 35000 },
+            { make: "Ford", model: "Mondeo", price: 32000 },
+            { make: "Porsche", model: "Boxter", price: 72000 }
+        ];
+
+        // let the grid know which columns and what data to use
+        var gridOptions = {
+            columnDefs: columnDefs,
+            rowData: rowData,
+            floatingFilter: true,
+            defaultColDef: {
+                // set the default column width
+                width: 150,
+                // make every column editable
+                editable: true,
+                // make every column use 'text' filter by default
+                filter: 'agTextColumnFilter',
+                filterParams: { clearButton: true },
+                sortable: true,
+                type: 'textColumn'
+                
+            },
+            rowSelection: 'multiple'
+        };
+
+        // lookup the container we want the Grid to use
+        var eGridDiv = document.querySelector('#myGrid');
+
+        // create the grid passing in the div to use together with the columns & data we want to use
+        new agGrid.Grid(eGridDiv, gridOptions);
+
+    </script>
+</body>
+</html>
